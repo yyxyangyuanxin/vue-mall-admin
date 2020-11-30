@@ -39,37 +39,5 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.wrapper {
-  width: calc(100vw - 180px);
-  border-bottom: 1px #ececec solid;
-  height: 50px;
-  line-height: 50px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  &.max-width{
-    width: calc(100vw - 64px);
-  }
-  .ant-page-header {
-    float: left;
-    &.has-breadcrumb {
-      padding-top: 14px;
-    }
-  }
-  .user-info {
-    position: fixed;
-    right: 30px;
-    .user-info-item {
-      cursor: pointer;
-      .exit-btn {
-        display: none;
-        width: 100%;
-        text-align: center;
-      }
-      &:hover .exit-btn {
-        display: block;
-      }
-    }
-  }
-}
+@import url('~@/styles/home/siderNav.less');
 </style>
