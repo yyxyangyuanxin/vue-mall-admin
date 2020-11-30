@@ -1,13 +1,13 @@
 <template>
   <div :class="{'wrapper': true, 'max-width': $store.state.collapsed}">
-    <a-button type="primary" @click="toggleCollapsed">
+    <a-button type="primary" @click="toggleCollapsedActions()">
       <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
     </a-button>
     <a-page-header :breadcrumb="{ props: { routes } }" />
     <div class="user-info">
       <div class="user-info-item">
-        欢迎yangyuanxin
-        <div class="exit-btn">退出</div>
+        {{ $store.state.user.username }}
+        <div class="exit-btn" @click="exitLoginActions()">退出</div>
       </div>
     </div>
   </div>
@@ -31,9 +31,13 @@ export default {
     };
   },
   methods: {
-    toggleCollapsed() {
-      this.$store.state.collapsed = !this.$store.state.collapsed;
+    toggleCollapsedActions(){
+      this.$store.dispatch('toggleCollapsed');
     },
+    exitLoginActions(){
+      this.$store.dispatch('exitLogin');
+      this.$router.push('/login');
+    }
   }
 };
 </script>
