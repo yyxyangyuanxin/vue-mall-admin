@@ -9,7 +9,9 @@ export default new Vuex.Store({
     // 菜单栏收放状态  false为展开   true为收起
     collapsed: false,
     // 用户信息
-    user: getUserCookie()
+    user: getUserCookie(),
+    // 菜单路由
+    menuRoutes: []
   },
   mutations: {
     toggleCollapsed(state) {
@@ -25,6 +27,9 @@ export default new Vuex.Store({
         role: '',
         email: ''
       };
+    },
+    changeMenuRoutes(state, menuRoutes){
+      state.menuRoutes = menuRoutes;
     }
   },
   actions: {
@@ -38,6 +43,9 @@ export default new Vuex.Store({
     exitLogin({ commit }){
       commit('exitLogin');
       removeUserCookie();
+    },
+    changeMenuRoutes({ commit }, menuRoutes){
+      commit('changeMenuRoutes', menuRoutes);
     }
   },
   modules: {

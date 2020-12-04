@@ -1,44 +1,27 @@
 <template>
-  <div :class="{'wrapper': true, 'min-width': $store.state.collapsed}">
+  <div :class="{ wrapper: true, 'min-width': $store.state.collapsed }">
     <a-menu
-      :default-selected-keys="['1']"
-      :default-open-keys="['sub1']"
+      :default-selected-keys="[$router.currentRoute.matched[1] ? 
+      $router.currentRoute.matched[1].name : '']"
+      :default-open-keys="[$router.currentRoute.matched[0].name]"
       mode="inline"
       theme="dark"
       :inline-collapsed="$store.state.collapsed"
     >
-      <a-menu-item key="1">
-        <a-icon type="pie-chart" />
-        <span>Option 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <a-icon type="desktop" />
-        <span>Option 2</span>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <a-icon type="inbox" />
-        <span>Option 3</span>
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <span slot="title"
-          ><a-icon type="mail" /><span>Navigation One</span></span
-        >
-        <a-menu-item key="5"> Option 5 </a-menu-item>
-        <a-menu-item key="6"> Option 6 </a-menu-item>
-        <a-menu-item key="7"> Option 7 </a-menu-item>
-        <a-menu-item key="8"> Option 8 </a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="sub2">
-        <span slot="title"
-          ><a-icon type="appstore" /><span>Navigation Two</span></span
-        >
-        <a-menu-item key="9"> Option 9 </a-menu-item>
-        <a-menu-item key="10"> Option 10 </a-menu-item>
-        <a-sub-menu key="sub3" title="Submenu">
-          <a-menu-item key="11"> Option 11 </a-menu-item>
-          <a-menu-item key="12"> Option 12 </a-menu-item>
+      <template v-for="route in $store.state.menuRoutes">
+        <a-sub-menu :key="route.name" v-if="route.meta.show">
+          <span slot="title"
+            ><a-icon :type="route.meta.icon" />
+            <span>{{ route.meta.title }}</span>
+          </span>
+          <a-menu-item v-for="child in route.children" :key="child.name">
+            <router-link class="router-link" :to="{ name: child.name }">
+              <a-icon :type="child.meta.icon" />
+              <span>{{ child.meta.title }}</span>
+            </router-link>
+          </a-menu-item>
         </a-sub-menu>
-      </a-sub-menu>
+      </template>
     </a-menu>
   </div>
 </template>
@@ -46,10 +29,11 @@
 <script>
 export default {
   data() {
-    return {
-      
-    };
+    return {};
   },
+  created(){
+    console.log(this.$router)
+  }
 };
 </script>
 

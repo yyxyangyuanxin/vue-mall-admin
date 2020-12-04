@@ -3,8 +3,8 @@
     <a-form-model-item has-feedback label="邮箱：" prop="email">
       <a-input v-model="loginForm.email" />
     </a-form-model-item>
-    <a-form-model-item has-feedback label="密码：" prop="pass">
-      <a-input v-model="loginForm.pass" type="password" autocomplete="off" />
+    <a-form-model-item has-feedback label="密码：" prop="password">
+      <a-input v-model="loginForm.password" type="password" autocomplete="off" />
     </a-form-model-item>
     <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }" class="btn-group">
       <a-button type="primary" @click="submitForm('ruleForm')">
@@ -39,19 +39,16 @@ export default {
       if (value === "") {
         callback(new Error("Please input the password"));
       } else {
-        // if (this.loginForm.pass !== "") {
-        //   this.$refs.loginForm.validateField("checkPass");
-        // }
         callback();
       }
     };
     return {
       loginForm: {
-        pass: "",
-        email: "",
+        password: 'a18520521423',
+        email: '1571827357@qq.com'
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "change" }],
+        password: [{ validator: validatePass, trigger: "change" }],
         email: [{ validator: checkEmail, trigger: "change" }],
       },
       layout: {
@@ -65,9 +62,10 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           api.login(this.loginForm).then(res => {
-            console.log(res)
             this.$store.dispatch('setUserInfo', res);
-            this.$router.push('/')
+            this.$router.push({
+              name: 'Home'
+            })
           }).catch(error => {
             this.$message.error(error)
           });

@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   height: 100vh;
+  width: 180px;
   position: fixed;
 
   &.min-width {
@@ -10,15 +11,22 @@
     }
   }
 
-  .ant-btn {
-    margin-left: 10px;
-    margin-top: 9px;
+  .ant-btn{
+    margin-top: 10px;
+    margin-left: 9px;
   }
 
   .ant-menu {
     width: 100%;
     margin-top: 0;
     height: 100%;
-
+    .router-link{
+      display: block;
+      width: 180px;
+      height: 40px;
+      position: relative;
+      left: -48px;
+      text-align: center;
+    }
   }
 }
