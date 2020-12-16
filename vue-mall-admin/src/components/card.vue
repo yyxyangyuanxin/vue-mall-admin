@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #ececec; padding: 20px">
+  <div style="background-color: #ececec; padding: 20px; position: relative;">
     <a-row :gutter="16">
       <a-col :span="8">
         <a-card title="商品总览" :bordered="false">
@@ -24,5 +24,6 @@
 export default {};
 </script>
 
-<style>
+<style lang='less' scoped>
+
 </style>
